@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <div class="">
+        <!-- http://getbootstrap.com/docs/4.1/content/typography/ -->
+        <h1 class="mb-3">Form</h1>
+
+        <!-- http://getbootstrap.com/docs/4.1/components/forms/ -->
+        <form action="/form" method="post" id="myForm" onsubmit="event.preventDefault(); checkSubmit()">
+
+            <!-- TODO -->
+                <div class="mt-3 mb-3 form-width form-group">
+                    <h5>Name</h5>
+                    <input class="form-width" id="name-input" type="text" name="name-input" placeholder="First and last name">
+                </div>
+                <div class="mt-3 mb-3 form-group">
+                    <h5>Age</h5>
+                    <input class="form-width" id="age-input" type="number" name="age-input" placeholder="Your age" max=90 min=1>
+                </div>
+
+                <div>
+                    <h5>Gender</h5>
+                    <select name="gender-input" class="form-width form-group" id="gender-input">
+                        <option value="" disabled selected></option>
+                        <option value="Masculine">Masculine</option>
+                        <option value="Femenine">Femenine</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="mt-3 mb-3 form-group">
+                    <h5>Income</h5>
+
+                    <input id="radio-1" type="radio" name="income-input" value="100k - 200k" checked> <label for="radio-1">100k - 200k</label> <br>
+                    <input id="radio-2" type="radio" name="income-input" value="200k - 400k"> <label for="radio-2">200k - 400k</label> <br>
+                    <input id="radio-3" type="radio" name="income-input" value="more than 400k"> <label for="radio-3">More than 400k</label>
+
+                </div>
+
+
+                <div class="mt-3 mb-3 form-group">
+                    <h5>How do you feel about your job?</h5>
+                    <select name="job-satisfaction" class="form-width" id="job-satisfaction">
+                        <option value="" disabled selected></option>
+                        <option value="Happy">Happy</option>
+                        <option value="Satisfied">Satisfied</option>
+                        <option value="Indiferent">Indiferent</option>
+                        <option value="Unhappy">Unhappy</option>
+                    </select>
+                </div>
+
+                <!-- http://getbootstrap.com/docs/4.1/components/buttons/ -->
+                <div id="fail"></div>
+                <button class="btn btn-primary form-width btn-dark" onclick="">Submit</button>
+
+        </form>
+
+    </div>
+
+
+    <script>
+
+        function checkSubmit() {
+
+            let name = document.querySelector("#name-input");
+            let age = document.querySelector("#age-input");
+            let satisfaction = document.querySelector("#job-satisfaction");
+            let gender = document.querySelector("#gender-input");
+
+
+            if(name.value == "" || age.value == 0 || gender.value == "" || satisfaction.value == "" ) {
+
+                if(document.getElementById("fail").innerHTML == "") {
+
+                    let div = document.createElement("div");
+                    div.className = "alert alert-warning alert-dismissible fade show";
+                    div.role = "alert";
+
+                    let strong = document.createElement("strong");
+                    strong.innerHTML = "Please answer all the questions!";
+
+                    let button = document.createElement("button");
+
+                    console.log(button);
+
+                    button.type = "button";
+                    button.className = "close";
+                    let att = document.createAttribute("data-dismiss");
+                    att.value = "alert";
+                    button.setAttribute("data-dismiss", "alert");
+                    let att2 = document.createAttribute("aria-label");
+                    att2.value = "close";
+                    button.setAttribute("aria-label","close");
+
+                    let span = document.createElement("span");
+                    span.innerHTML = "&times;";
+                    let att3 = document.createAttribute("area-hidden");
+                    att3.value = "true";
+                    span.setAttribute("area-hidden", "true")
+
+                    div.appendChild(strong);
+                    div.appendChild(button);
+                    button.appendChild(span);
+                    document.querySelector("#fail").appendChild(div);
+                }
+
+            } else {
+                document.forms["myForm"].submit();
+            }
+
+        }
+        /* TODO */
+
+    </script>
+
+{% endblock %}

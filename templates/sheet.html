@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <!-- http://getbootstrap.com/docs/4.1/components/alerts/ -->
+    <div id="success" role="alert">{{ message }}</div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Age</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Income</th>
+              <th scope="col">Satisfaction</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for survey in surveys %}
+              <tr>
+                  <td class="name">{{ survey[0] }}</td>
+                  <td class="age">{{ survey[1] }}</td>
+                  <td class="gender">{{ survey[2] }}</td>
+                  <td class="income">{{ survey[3] }}</td>
+                  <td class="satisfaction">{{ survey[4] }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+</table>
+
+    <script>
+
+        if( document.getElementById("success").innerHTML == "success") {
+
+                    document.getElementById("success").innerHTML = "";
+
+                    let div = document.createElement("div");
+                    div.className = "alert alert-success alert-dismissible fade show";
+                    div.role = "alert";
+
+                    let strong = document.createElement("strong");
+                    strong.innerHTML = "Your survey has been submited!";
+
+                    let button = document.createElement("button");
+
+                    button.type = "button";
+                    button.className = "close";
+                    let att = document.createAttribute("data-dismiss");
+                    att.value = "alert";
+                    button.setAttribute("data-dismiss", "alert");
+                    let att2 = document.createAttribute("aria-label");
+                    att2.value = "close";
+                    button.setAttribute("aria-label","close");
+
+                    let span = document.createElement("span");
+                    span.innerHTML = "&times;";
+                    let att3 = document.createAttribute("area-hidden");
+                    att3.value = "true";
+                    span.setAttribute("area-hidden", "true");
+
+                    div.appendChild(strong);
+                    div.appendChild(button);
+                    button.appendChild(span);
+                    document.querySelector("#success").appendChild(div);
+
+                    addRecords();
+        }
+
+
+        function addRecords() {
+
+        }
+
+
+
+    </script>
+{% endblock %}
